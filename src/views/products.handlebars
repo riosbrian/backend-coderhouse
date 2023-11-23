@@ -8,8 +8,11 @@
       <p>{{{this.title}}}</p>
       <p>{{{this.description}}}</p>
       <span>{{{this.price}}}</span>
-      <button class='btn-addToCart' id={{{this._id}}}>A</button>
+      <button class='btn btn-add' id={{{this._id}}}>Agregar al carrito</button>
     </article>
   {{/each}}
 </div>
 <button id='logout'>Cerrar sesión</button>
+{{#if role}}
+  <script src='/js/addProduct.js'></script>
+{{/if}}

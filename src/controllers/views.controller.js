@@ -18,9 +18,11 @@ export const GETLogin = async (req, res, next) => {
 
 export const GETProducts = async (req, res, next) => {
   // RECORDAR LAS QUERIES
+  const { user } = req.user;
+  const role = user.role === 'admin' || user.role === 'premium' ? true : false;
   try {
     const products = await ViewsService.getProducts();
-    res.render('products', { data: products.data });
+    res.render('products', { data: products.data, role });
   } catch (error) {
     next(error);
   }
