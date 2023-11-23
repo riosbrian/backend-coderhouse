@@ -1,5 +1,7 @@
 <h1>Productos</h1>
 {{#if error}}<p>{{{message}}}</p>{{/if}}
+{{!-- ENVIAR SI ES PREMIUM O ADMIN --}}
+{{> addProduct}}
 <div class='products-container'>
   {{#each data}}
     <article class='product-card'>

@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import * as ViewsController from '../../controllers/views.controller.js';
+
 import {
   inyectUser,
   isLogged,
@@ -6,16 +8,15 @@ import {
 } from '../../middlewares/secure.middleware.js';
 const viewsRouter = Router();
 
-viewsRouter.get('/register', inyectUser, isLogged, (req, res, next) => {
-  res.render('register');
-});
+viewsRouter.get('/register', inyectUser, isLogged, ViewsController.GETRegister);
 
-viewsRouter.get('/login', inyectUser, isLogged, (req, res, next) => {
-  res.render('login');
-});
+viewsRouter.get('/login', inyectUser, isLogged, ViewsController.GETLogin);
 
-viewsRouter.get('/products', inyectUser, notLogged, (req, res, next) => {
-  res.status(200).json({ msg: 'estoy en productos' });
-});
+viewsRouter.get(
+  '/products',
+  inyectUser,
+  notLogged,
+  ViewsController.GETProducts
+);
 
 export default viewsRouter;

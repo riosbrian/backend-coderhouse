@@ -6,13 +6,16 @@ import apiRouter from './routes/api.routes.js';
 import notFoundHandler from './middlewares/notFoundHandler.js';
 import errorHandler from './middlewares/errorHandler.js';
 import indexRouter from './routes/index.routes.js';
-import { engine } from 'express-handlebars';
+import handlebars from 'express-handlebars';
 import __dirname from './config/dirname.js';
 
 const app = express();
 
 // HANDLEBARS CONFIG
-app.engine('handlebars', engine());
+handlebars.create({
+  partialsDir: `${__dirname}/../views/partials`,
+});
+app.engine('handlebars', handlebars.engine());
 app.set('view engine', 'handlebars');
 app.set('views', `${__dirname}/../views`);
 
@@ -21,6 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors());
+app.use(express.static('public'));
 
 // ROUTES
 app.use(apiRouter);
