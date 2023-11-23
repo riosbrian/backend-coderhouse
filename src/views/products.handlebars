@@ -1,0 +1,13 @@
+<h1>Productos</h1>
+{{#if error}}<p>{{{message}}}</p>{{/if}}
+<div class='products-container'>
+  {{#each data}}
+    <article class='product-card'>
+      <p>{{{this.title}}}</p>
+      <p>{{{this.description}}}</p>
+      <span>{{{this.price}}}</span>
+      <button class='btn-addToCart' id={{{this._id}}}>A</button>
+    </article>
+  {{/each}}
+</div>
+<button id='logout'>Cerrar sesión</button>

@@ -1,0 +1,9 @@
+# node modules
+node_modules
+
+# variables de entorno
+.env.dev
+.env.prod
+
+# configuraci{on de prettier
+.prettierrc
