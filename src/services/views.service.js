@@ -4,10 +4,9 @@ const { Product, User } = dao;
 const productDAO = new Product();
 const userDAO = new User();
 
-export const getProducts = async () => {
-  // RECORDAR LAS QUERIES
+export const getProducts = async (queries) => {
   try {
-    const response = await productDAO.find();
+    const response = await productDAO.findFiltered(queries);
     return {
       error: false,
       data: response,

@@ -5,9 +5,9 @@
 <div class='products-container'>
   {{#each data}}
     <article class='product-card'>
-      <p>{{{this.title}}}</p>
-      <p>{{{this.description}}}</p>
-      <span>{{{this.price}}}</span>
+      <p class="product-card__name">{{{this.title}}}</p>
+      <p class="product-card__desc">{{{this.description}}}</p>
+      <span class="product-card__price">${{{this.price}}}</span>
       <button class='btn btn-add' id={{{this._id}}}>Agregar al carrito</button>
     </article>
   {{/each}}

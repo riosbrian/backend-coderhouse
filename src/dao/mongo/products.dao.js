@@ -32,6 +32,15 @@ export default class ProductsDAO {
     }
   };
 
+  findFiltered = async (options) => {
+    try {
+      return await this.model.paginate({}, options);
+    } catch (error) {
+      error.from = 'DAO';
+      throw error;
+    }
+  };
+
   findByIdAndUpdate = async (id, data) => {
     try {
       return await this.model.findByIdAndUpdate(id, data, { new: true });
