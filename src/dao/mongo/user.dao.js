@@ -22,4 +22,13 @@ export default class UserDAO {
       throw error;
     }
   };
+
+  findByIdAndUpdate = async (id, data) => {
+    try {
+      return await this.model.findByIdAndUpdate(id, data, { new: true });
+    } catch (error) {
+      error.from = 'DAO';
+      throw error;
+    }
+  };
 }

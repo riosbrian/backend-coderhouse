@@ -25,8 +25,6 @@ authForm.addEventListener('submit', async (e) => {
     };
   }
 
-  console.log(userData);
-
   try {
     const res = await fetch(`${ROUTE}${endpoint}`, {
       method: 'POST',

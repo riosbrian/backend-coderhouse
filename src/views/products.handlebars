@@ -1,18 +1,27 @@
-<h1>Productos</h1>
+<h1 class="title">Productos</h1>
 {{#if error}}<p>{{{message}}}</p>{{/if}}
 {{!-- ENVIAR SI ES PREMIUM O ADMIN --}}
+{{#if role}}
 {{> addProduct}}
+{{/if}}
+<div class="line"></div>
 <div class='products-container'>
   {{#each data}}
-    <article class='product-card'>
-      <p class="product-card__name">{{{this.title}}}</p>
-      <p class="product-card__desc">{{{this.description}}}</p>
-      <span class="product-card__price">${{{this.price}}}</span>
-      <button class='btn btn-add' id={{{this._id}}}>Agregar al carrito</button>
+    <article class="product-card">
+      <div class="product-card__img">
+        <img src="" alt="">
+      </div>
+      <div class="product-card__detail">
+        <p class="product-card__name">{{{this.title}}}</p>
+        <p class="product-card__desc">{{{this.description}}}</p>
+      </div>
+      <div class="product-card__purchase">
+        <span class="product-card__price">${{{this.price}}}</span>
+        <button class='btn btn-add' id={{{this._id}}}>Agregar al carrito</button>
+      </div>
     </article>
   {{/each}}
 </div>
-<button id='logout'>Cerrar sesión</button>
 {{#if role}}
   <script src='/js/addProduct.js'></script>
 {{/if}}

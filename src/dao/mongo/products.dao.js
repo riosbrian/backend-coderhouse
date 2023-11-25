@@ -16,7 +16,7 @@ export default class ProductsDAO {
 
   find = async () => {
     try {
-      return await this.model.find().lean();
+      return await this.model.find();
     } catch (error) {
       error.from = 'DAO';
       throw error;

@@ -24,7 +24,8 @@ export const GETProductById = async (req, res, next) => {
 };
 
 export const POSTNewProduct = async (req, res, next) => {
-  const { role } = req.user;
+  const { user } = req.user;
+  const role = user.role;
   const productData = req.body;
   try {
     // 1. Valido el rol del usuario

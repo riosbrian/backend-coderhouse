@@ -14,9 +14,11 @@ switch (args.mode) {
     // 2. Importaciones dinamicas
     const { default: ProductsDAO } = await import('./mongo/products.dao.js');
     const { default: UserDAO } = await import('./mongo/user.dao.js');
+    const { default: CartDAO } = await import('./mongo/cart.dao.js');
     dao = {
       Product: ProductsDAO,
       User: UserDAO,
+      Cart: CartDAO,
     };
     break;
 }

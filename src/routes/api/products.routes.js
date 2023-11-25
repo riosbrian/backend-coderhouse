@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import * as ProductsController from '../../controllers/products.controller.js';
+import { inyectUser } from '../../middlewares/secure.middleware.js';
 
 const productsRouter = Router();
 
@@ -11,7 +12,7 @@ productsRouter.param('pid', (req, res, next, param) => {
 productsRouter
   .route('/products')
   .get(ProductsController.GETProducts)
-  .post(ProductsController.POSTNewProduct);
+  .post(inyectUser, ProductsController.POSTNewProduct);
 
 productsRouter
   .route('/products/:pid([0-9a-zA-Z]+)')

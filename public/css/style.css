@@ -5,6 +5,7 @@
   --color-white: #ffffff;
   --color-black: #212529;
   --color-grey: #6c757d;
+  --color-light-grey: #f5f5f5;
   --color-red: #dc3545;
   --color-green: #198754;
   --color-blue: #0d6efd;
@@ -19,6 +20,10 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html {
+  font-size: 62.5%;
 }
 
 body {
@@ -37,18 +42,22 @@ body {
   cursor: pointer;
   font-family: var(--font-primary);
   font-weight: 500;
-  padding: 0.625rem 1.125rem;
+  padding: 0.6rem 1rem;
 }
 
 .btn-add {
   background-color: var(--color-yellow);
 }
 
+.btn-logout {
+  font-size: 1.6rem;
+}
+
 .inputField {
   border: 1px solid var(--color-grey);
   border-radius: 5px;
   font-family: var(--font-primary);
-  padding: 0.625rem 1.125rem;
+  padding: 0.6rem 1rem;
 }
 
 ul {
@@ -57,18 +66,44 @@ ul {
 
 /* LAYOUTS */
 
+.title {
+  font-size: 4rem;
+}
+
 .header {
   align-items: center;
   display: flex;
   font-family: var(--font-primary);
   justify-content: space-between;
   padding: 2rem;
+  background-color: var(--color-light-grey);
 }
 
 .main-menu {
   align-items: center;
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
+  font-size: 1.6rem;
+}
+
+.main-menu a {
+  color: var(--color-black);
+  text-decoration: none;
+}
+
+.main-content {
+  width: 140rem;
+  margin: 0 auto;
+  padding-top: 4rem;
+}
+
+.addProduct-partial {
+  padding: 2rem 0;
+}
+
+.addProduct-partial h2 {
+  margin-bottom: 2rem;
+  font-size: 2rem;
 }
 
 #addProduct {
@@ -78,7 +113,8 @@ ul {
   gap: 1rem;
 }
 
-.add-title {
+.line {
+  border-bottom: 1px solid var(--color-grey);
   margin: 2rem 0;
 }
 
@@ -86,29 +122,45 @@ ul {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
   padding: 2rem 0;
+  justify-content: space-between;
+  gap: 2rem;
 }
 
 .product-card {
   border: 1px solid var(--color-grey);
   border-radius: 5px;
-  padding: 1rem;
+  width: 24rem;
+  overflow: hidden;
 }
 
-.product-card p {
-  margin-bottom: 1rem;
+.product-card__img {
+  height: 20rem;
+  background-color: var(--color-grey);
+}
+
+.product-card__detail {
+  padding: 2rem 0;
+  text-align: center;
 }
 
 .product-card__name {
-  font-size: 1.275rem;
+  font-size: 1.8rem;
   font-weight: 500;
 }
+
 .product-card__desc {
-  font-size: 0.875rem;
+  font-size: 1.6rem;
+}
+
+.product-card__purchase {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 2rem 2rem;
 }
 
 .product-card__price {
-  font-weight: 500;
-  padding: 2px;
+  font-size: 1.8rem;
+  font-weight: 700;
 }
