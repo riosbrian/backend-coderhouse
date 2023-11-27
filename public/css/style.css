@@ -49,6 +49,10 @@ body {
   background-color: var(--color-yellow);
 }
 
+.btn-delete {
+  background-color: var(--color-red);
+}
+
 .btn-logout {
   font-size: 1.6rem;
 }
@@ -72,18 +76,18 @@ ul {
 
 .header {
   align-items: center;
+  background-color: var(--color-light-grey);
   display: flex;
   font-family: var(--font-primary);
   justify-content: space-between;
   padding: 2rem;
-  background-color: var(--color-light-grey);
 }
 
 .main-menu {
   align-items: center;
   display: flex;
-  gap: 2rem;
   font-size: 1.6rem;
+  gap: 2rem;
 }
 
 .main-menu a {
@@ -92,9 +96,9 @@ ul {
 }
 
 .main-content {
-  width: 140rem;
   margin: 0 auto;
   padding-top: 4rem;
+  width: 140rem;
 }
 
 .addProduct-partial {
@@ -102,8 +106,8 @@ ul {
 }
 
 .addProduct-partial h2 {
-  margin-bottom: 2rem;
   font-size: 2rem;
+  margin-bottom: 2rem;
 }
 
 #addProduct {
@@ -122,21 +126,21 @@ ul {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  padding: 2rem 0;
-  justify-content: space-between;
   gap: 2rem;
+  justify-content: space-between;
+  padding: 2rem 0;
 }
 
 .product-card {
   border: 1px solid var(--color-grey);
   border-radius: 5px;
-  width: 24rem;
   overflow: hidden;
+  width: 24rem;
 }
 
 .product-card__img {
-  height: 20rem;
   background-color: var(--color-grey);
+  height: 20rem;
 }
 
 .product-card__detail {
@@ -144,7 +148,8 @@ ul {
   text-align: center;
 }
 
-.product-card__name {
+.product-card__name,
+.item-card__name {
   font-size: 1.8rem;
   font-weight: 500;
 }
@@ -154,13 +159,46 @@ ul {
 }
 
 .product-card__purchase {
+  align-items: center;
   display: flex;
   justify-content: space-around;
-  align-items: center;
   padding: 0 2rem 2rem;
 }
 
-.product-card__price {
+.product-card__price,
+.item-card__price {
   font-size: 1.8rem;
   font-weight: 700;
+}
+
+/* CART */
+
+.items-container .item-card:not(:last-child) {
+  border-bottom: 1px solid var(--color-grey);
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+}
+
+.item-card {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.item-card__img {
+  background-color: #6c757d;
+  height: 20rem;
+  width: 20rem;
+}
+
+.item-card__price {
+  text-align: center;
+  width: 8rem;
+}
+
+.item-card__actions {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
 }

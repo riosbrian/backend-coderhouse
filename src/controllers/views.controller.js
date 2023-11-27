@@ -32,3 +32,18 @@ export const GETProducts = async (req, res, next) => {
     next(error);
   }
 };
+
+export const GETCart = async (req, res, next) => {
+  const { limit = 10, page = 1, sort = 1 } = req.query;
+  const { user } = req.user;
+  try {
+    const products = await ViewsService.getCart(user.cart);
+    const data = products.data.products.map((item) => ({
+      ...item.product._doc,
+      quantity: item.quantity,
+    }));
+    res.render('cart', { data });
+  } catch (error) {
+    next(error);
+  }
+};

@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose';
+import paginate from 'mongoose-paginate-v2';
 
 const cartSchema = new Schema({
   products: {
@@ -24,5 +25,6 @@ cartSchema.pre('findOne', function () {
   this.populate('products.product');
 });
 
+cartSchema.plugin(paginate);
 const CartModel = model('carts', cartSchema);
 export default CartModel;

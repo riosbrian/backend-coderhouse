@@ -19,6 +19,7 @@ cartRouter
   .route('/carts/:pid([0-9a-zA-Z]+)')
   .post(inyectUser, isAuthenticated, CartController.POSTAddToCart)
   .put(inyectUser, CartController.PUTUpdateCart)
+  .delete(CartController.DELETEProductToCart)
   .delete(CartController.DELETECart);
 
 export default cartRouter;

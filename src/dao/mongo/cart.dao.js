@@ -32,9 +32,9 @@ export default class CartDAO {
     }
   };
 
-  findFiltered = async (options) => {
+  findFiltered = async (id, options) => {
     try {
-      return await this.model.paginate({}, options);
+      return await this.model.paginate({ _id: id }, options);
     } catch (error) {
       error.from = 'DAO';
       throw error;

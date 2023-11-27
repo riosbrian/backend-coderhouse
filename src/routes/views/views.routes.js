@@ -19,4 +19,6 @@ viewsRouter.get(
   ViewsController.GETProducts
 );
 
+viewsRouter.get('/cart', inyectUser, notLogged, ViewsController.GETCart);
+
 export default viewsRouter;

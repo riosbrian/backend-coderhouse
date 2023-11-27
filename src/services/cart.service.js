@@ -85,8 +85,35 @@ export const addToCart = async (id, pid) => {
   }
 };
 
-export const deleteCart = async (id, pid) => {
+export const deleteProductToCart = async (id, pid) => {
   try {
+    const cart = await cartDAO.findById(id);
+    const index = cart.products.findIndex((p) => p.product._id == pid);
+    cart.products.splice(index, 1);
+    await cartDAO.save(cart);
+
+    return {
+      error: false,
+      data: cart,
+      message: 'Product deleted successfully',
+    };
+  } catch (error) {
+    error.from = 'SERVICE';
+    throw error;
+  }
+};
+
+export const emptyCart = async (id) => {
+  try {
+    const cart = await cartDAO.findById(id);
+    cart.products = [];
+    await cartDAO.save(cart);
+
+    return {
+      error: false,
+      data: cart,
+      message: 'Cart emptied successfully',
+    };
   } catch (error) {
     error.from = 'SERVICE';
     throw error;

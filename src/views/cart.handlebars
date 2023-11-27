@@ -1,0 +1,22 @@
+<h1 class='title'>Carrito</h1>
+{{#if error}}<p>{{{message}}}</p>{{/if}}
+{{! ENVIAR SI ES PREMIUM O ADMIN }}
+<div class='line'></div>
+<div class='items-container'>
+  {{#each data}}
+    <article class='item-card'>
+      <div class='item-card__img'>
+        <img src='' alt='' />
+      </div>
+      <p class='item-card__name'>{{{this.title}}}</p>
+      <span class='item-card__price'>${{{this.price}}}</span>
+      <div class='item-card__actions'>
+        <button do='sub' class='btn btn-sub' id={{{this._id}}}>-</button>
+        <span class='item-card__quantity'>{{{this.quantity}}}</span>
+        <button do='plus' class='btn btn-plus' id={{{this._id}}}>+</button>
+        <button do='del' class='btn btn-delete' id={{{this._id}}}>x</button>
+      </div>
+    </article>
+  {{/each}}
+</div>
+<script src='/js/cart.js'></script>

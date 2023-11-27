@@ -10,6 +10,7 @@ export const GETCart = async (req, res, next) => {
     const cart = await CartService.getCartById(user.cart);
     res.status(200).json(cart);
   } catch (error) {
+    error.from = 'CONTROLLER';
     next(error);
   }
 };
@@ -23,7 +24,6 @@ export const POSTNewCart = async (req, res, next) => {
     const newCart = await CartService.createNewCart(sub);
     // Actualizar token y cookie
     const updatedToken = generateToken(newCart.data);
-    console.log('TOKEN: ', updatedToken);
     res.cookie('accessToken', updatedToken, {
       maxAge: 24 * 60 * 60 * 1000,
       httpOnly: true,
@@ -41,6 +41,7 @@ export const POSTAddToCart = async (req, res, next) => {
     const cart = await CartService.addToCart(user.cart, req.productID);
     res.status(201).json(cart);
   } catch (error) {
+    error.from = 'CONTROLLER';
     next(error);
   }
 };
@@ -52,11 +53,32 @@ export const PUTUpdateCart = async (req, res, next) => {
     const cart = await CartService.updateCart(user.cart, req.productID);
     res.status(200).json(cart);
   } catch (error) {
+    error.from = 'CONTROLLER';
+    next(error);
+  }
+};
+
+export const DELETEProductToCart = async (req, res, next) => {
+  const { user } = req.user;
+  const { pid } = req.params;
+  try {
+    const cart = await CartService.deleteProductToCart(user.cart, pid);
+    if (!cart) return CustomError.create(ERROR_DICTIONARY.default);
+    res.status(200).json(cart);
+  } catch (error) {
+    error.from = 'CONTROLLER';
     next(error);
   }
 };
 
 export const DELETECart = async (req, res, next) => {
+  const { user } = req.user;
   try {
-  } catch (error) {}
+    const cart = await CartService.emptyCart(user.cart);
+    if (!cart) return CustomError.create(ERROR_DICTIONARY.default);
+    res.status(200).json(cart);
+  } catch (error) {
+    error.from = 'CONTROLLER';
+    next(error);
+  }
 };
