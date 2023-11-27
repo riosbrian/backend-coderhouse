@@ -3,6 +3,8 @@
   <ul class='main-menu'>
     <li><a href='/products'>Productos</a></li>
     <li><a href='/cart'>Carrito</a></li>
-    <li><button class='btn btn-logout' id='logout'>Cerrar sesión</button></li>
+    {{#if isAble}}
+      <li><button class='btn btn-logout' id='logout'>Cerrar sesión</button></li>
+    {{/if}}
   </ul>
 </header>

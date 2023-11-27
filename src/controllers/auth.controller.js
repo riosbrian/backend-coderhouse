@@ -49,6 +49,7 @@ export const POSTLogout = async (req, res, next) => {
     res.status(200).json({
       error: false,
       message: 'Session closed successfully',
+      redirect: '/login',
     });
   } catch (error) {
     error.from = error.from || 'controller';

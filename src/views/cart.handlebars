@@ -10,13 +10,13 @@
       </div>
       <p class='item-card__name'>{{{this.title}}}</p>
       <span class='item-card__price'>${{{this.price}}}</span>
-      <div class='item-card__actions'>
-        <button do='sub' class='btn btn-sub' id={{{this._id}}}>-</button>
+      <div class='item-card__actions' id={{{this._id}}}>
+        <button do='sub' class='btn btn-sub'>-</button>
         <span class='item-card__quantity'>{{{this.quantity}}}</span>
-        <button do='plus' class='btn btn-plus' id={{{this._id}}}>+</button>
-        <button do='del' class='btn btn-delete' id={{{this._id}}}>x</button>
+        <button do='plus' class='btn btn-plus'>+</button>
+        <button do='del' class='btn btn-delete'>x</button>
       </div>
     </article>
   {{/each}}
 </div>
-<script src='/js/cart.js'></script>
+<script type='module' src='/js/cart.js'></script>

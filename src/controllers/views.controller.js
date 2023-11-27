@@ -10,7 +10,7 @@ export const GETRegister = async (req, res, next) => {
 
 export const GETLogin = async (req, res, next) => {
   try {
-    res.render('login');
+    res.render('login', { showHeader: true, isAble: false });
   } catch (error) {
     next(error);
   }
@@ -27,7 +27,12 @@ export const GETProducts = async (req, res, next) => {
       sort: { price: sort },
       lean: true,
     });
-    res.render('products', { data: products.data.docs, role });
+    res.render('products', {
+      data: products.data.docs,
+      role,
+      showHeader: true,
+      isAble: true,
+    });
   } catch (error) {
     next(error);
   }
@@ -42,7 +47,7 @@ export const GETCart = async (req, res, next) => {
       ...item.product._doc,
       quantity: item.quantity,
     }));
-    res.render('cart', { data });
+    res.render('cart', { data, showHeader: true, isAble: true });
   } catch (error) {
     next(error);
   }

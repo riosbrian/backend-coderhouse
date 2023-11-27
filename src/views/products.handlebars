@@ -1,6 +1,5 @@
 <h1 class="title">Productos</h1>
 {{#if error}}<p>{{{message}}}</p>{{/if}}
-{{!-- ENVIAR SI ES PREMIUM O ADMIN --}}
 {{#if role}}
 {{> addProduct}}
 {{/if}}
@@ -15,7 +14,7 @@
         <p class="product-card__name">{{{this.title}}}</p>
         <p class="product-card__desc">{{{this.description}}}</p>
       </div>
-      <div class="product-card__purchase">
+      <div class="product-card__purchase" id={{{this._id}}}>
         <span class="product-card__price">${{{this.price}}}</span>
         <button class='btn btn-add' id={{{this._id}}}>Agregar al carrito</button>
       </div>

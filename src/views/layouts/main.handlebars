@@ -5,10 +5,16 @@
     <title>Backend</title>
     <link rel="stylesheet" href="/css/style.css">
   </head>
-  {{> header}}
+  {{#if showHeader}}
+    {{> header isAble=isAble}}
+  {{/if}}
   <body>
     <main class="main-content">
       {{{body}}}
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{#if isAble}}
+      <script src="/js/index.js"></script>
+    {{/if}}
   </body>
 </html>

@@ -50,7 +50,7 @@ export const updateCart = async (id, pid) => {
 
     return {
       error: false,
-      data: cart,
+      data: cart.products[index] || false,
       message: 'Cart updated successfully',
     };
   } catch (error) {
@@ -68,7 +68,11 @@ export const addToCart = async (id, pid) => {
       const stock = cart.products[index].product.stock;
       cart.products[index].quantity += 1;
       if (cart.products[index].quantity > stock)
-        throw new Error('Stock insuficiente');
+        return {
+          error: true,
+          data: false,
+          message: 'Stock insuficiente',
+        };
       await cartDAO.save(cart);
     } else {
       cart.products.push({ product: pid });
@@ -76,7 +80,7 @@ export const addToCart = async (id, pid) => {
     }
     return {
       error: false,
-      data: cart,
+      data: cart.products[index],
       message: 'Product added successfully',
     };
   } catch (error) {
