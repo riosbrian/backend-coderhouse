@@ -5,6 +5,7 @@ import { generateToken } from '../utils/jwt.js';
 
 export const GETCart = async (req, res, next) => {
   const { user } = req.user;
+  console.log('CART:', user);
   try {
     if (!user.cart) return CustomError.create(ERROR_DICTIONARY.default);
     const cart = await CartService.getCartById(user.cart);
