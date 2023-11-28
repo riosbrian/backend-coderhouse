@@ -1,0 +1,49 @@
+<div class='addProduct-partial'>
+  <h2>Editar producto</h2>
+  <form currentUser={{userID}} method='put' id='editProduct'>
+    <input
+      class='inputField'
+      type='text'
+      name='title'
+      placeholder='Titulo'
+      value='{{{data.title}}}'
+    />
+    <input
+      class='inputField'
+      type='text'
+      name='description'
+      placeholder='Descripción'
+      value='{{data.description}}'
+    />
+    <input
+      class='inputField'
+      type='number'
+      name='price'
+      placeholder='Precio'
+      value={{data.price}}
+    />
+    <input
+      class='inputField'
+      type='text'
+      name='thumbnail'
+      placeholder='Imagen'
+      value='{{data.thumbnail}}'
+    />
+    <input
+      class='inputField'
+      type='text'
+      name='code'
+      placeholder='Código'
+      value='{{data.code}}'
+    />
+    <input
+      class='inputField'
+      type='number'
+      name='stock'
+      placeholder='Stock'
+      value={{data.stock}}
+    />
+    <button id='btn-edit' class='btn btn-edit' type='submit'>Editar producto</button>
+  </form>
+</div>
+<script src='/js/editProduct.js'></script>

@@ -11,6 +11,10 @@ const productSchema = new Schema({
   thumbnail: { type: String, required: true },
   code: { type: String, required: true, index: true, unique: true },
   stock: { type: Number, required: true },
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'users',
+  },
 });
 
 productSchema.plugin(paginate);

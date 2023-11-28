@@ -18,7 +18,7 @@ export const GETLogin = async (req, res, next) => {
 
 export const GETProducts = async (req, res, next) => {
   const { limit = 10, page = 1, sort = 1 } = req.query;
-  const { user } = req.user;
+  const { user, sub } = req.user;
   const role = user.role === 'admin' || user.role === 'premium' ? true : false;
   try {
     const products = await ViewsService.getProducts({
@@ -30,6 +30,7 @@ export const GETProducts = async (req, res, next) => {
     res.render('products', {
       data: products.data.docs,
       role,
+      userID: sub,
       showHeader: true,
       isAble: true,
     });
@@ -48,6 +49,24 @@ export const GETCart = async (req, res, next) => {
       quantity: item.quantity,
     }));
     res.render('cart', { data, showHeader: true, isAble: true });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const GETEditProduct = async (req, res, next) => {
+  const { pid } = req.params;
+  const { user, sub } = req.user;
+  const role = user.role === 'admin' || user.role === 'premium' ? true : false;
+  try {
+    const product = await ViewsService.getProductById(pid);
+    res.render('editProduct', {
+      data: { ...product.data._doc },
+      role,
+      userID: sub,
+      showHeader: true,
+      isAble: true,
+    });
   } catch (error) {
     next(error);
   }

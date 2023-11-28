@@ -19,6 +19,20 @@ export const getProducts = async (queries) => {
   }
 };
 
+export const getProductById = async (id) => {
+  try {
+    const response = await productDAO.findById(id);
+    return {
+      error: false,
+      data: response,
+      message: 'product retrieved successfuly',
+    };
+  } catch (error) {
+    error.from = 'SERVICE';
+    throw error;
+  }
+};
+
 export const getCart = async (id) => {
   try {
     const response = await cartDAO.findById(id);

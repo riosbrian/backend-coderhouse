@@ -57,6 +57,10 @@ body {
   font-size: 1.6rem;
 }
 
+.btn-edit {
+  background-color: var(--color-green);
+}
+
 .btn-disable {
   background-color: var(--color-light-grey);
   color: var(--color-grey);

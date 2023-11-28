@@ -2,20 +2,24 @@ const addProductForm = document.getElementById('addProduct');
 const btnAddProduct = document.getElementById('btn-add');
 const productsContainer = document.querySelector('.products-container');
 
-const ROUTE = 'http://localhost:8081/api/products/';
+const ROUTE = `http://localhost:8081/api/products/`;
 const ROUTE_CART = `http://localhost:8081/api/carts/`;
 
 addProductForm.addEventListener('submit', async (e) => {
   e.preventDefault();
+  const id = e.target.getAttribute('currentUser');
   const formData = new FormData(e.target);
-  productData = {
+  const productData = {
     title: formData.get('title'),
     description: formData.get('description'),
     price: formData.get('price'),
     thumbnail: formData.get('thumbnail'),
     code: formData.get('code'),
     stock: formData.get('stock'),
+    owner: id,
   };
+
+  console.log(productData);
 
   try {
     const res = await fetch(`${ROUTE}`, {
@@ -36,6 +40,9 @@ addProductForm.addEventListener('submit', async (e) => {
 productsContainer.addEventListener('click', async (e) => {
   if (e.target.tagName !== 'BUTTON') return;
   const id = e.target.parentNode.getAttribute('id');
+  const action = e.target.getAttribute('do');
+  if (action === 'edit') return (window.location.href = `/edit/${id}`);
+
   try {
     const res = await fetch(`${ROUTE_CART}${id}`, {
       method: 'POST',

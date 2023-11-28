@@ -1,7 +1,7 @@
 <h1 class="title">Productos</h1>
 {{#if error}}<p>{{{message}}}</p>{{/if}}
 {{#if role}}
-{{> addProduct}}
+{{> addProduct userId=userID}}
 {{/if}}
 <div class="line"></div>
 <div class='products-container'>
@@ -16,7 +16,11 @@
       </div>
       <div class="product-card__purchase" id={{{this._id}}}>
         <span class="product-card__price">${{{this.price}}}</span>
-        <button class='btn btn-add' id={{{this._id}}}>Agregar al carrito</button>
+        {{#if this.owner}}
+          <button do="edit" class='btn btn-add btn-edit'>Editar producto</button>
+        {{else}}
+          <button do="add" class='btn btn-add'>Agregar al carrito</button>
+        {{/if}}
       </div>
     </article>
   {{/each}}

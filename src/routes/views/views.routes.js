@@ -13,6 +13,13 @@ viewsRouter.get('/register', inyectUser, isLogged, ViewsController.GETRegister);
 viewsRouter.get('/login', inyectUser, isLogged, ViewsController.GETLogin);
 
 viewsRouter.get(
+  '/edit/:pid',
+  inyectUser,
+  notLogged,
+  ViewsController.GETEditProduct
+);
+
+viewsRouter.get(
   '/products',
   inyectUser,
   notLogged,
