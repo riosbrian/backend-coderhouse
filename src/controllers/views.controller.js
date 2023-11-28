@@ -41,10 +41,8 @@ export const GETProducts = async (req, res, next) => {
 
 export const GETCart = async (req, res, next) => {
   const { user } = req.user;
-  console.log(user);
   try {
     const products = await ViewsService.getCart(user.cart);
-    console.log(products);
     const data = products.data.products.map((item) => ({
       ...item.product._doc,
       quantity: item.quantity,

@@ -7,7 +7,8 @@ export const POSTPurchase = async (req, res, next) => {
   try {
     const ticket = await TicketsServices.createTicket(sub, user.cart);
     console.log(ticket);
-    const updatedToken = generateToken({
+    // PORQUE FLASHEE QUE TENIA QUE GUARDAR DE NUEVO EL TOKEN
+    /* const updatedToken = generateToken({
       id: sub,
       cart: ticket.data.cart,
       ...user,
@@ -15,7 +16,7 @@ export const POSTPurchase = async (req, res, next) => {
     res.cookie('accessToken', updatedToken, {
       maxAge: 24 * 60 * 60 * 1000,
       httpOnly: true,
-    });
+    }); */
     res.status(200).json(ticket);
   } catch (error) {
     next(error);
