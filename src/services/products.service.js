@@ -21,10 +21,10 @@ export const addProduct = async (data) => {
   }
 };
 
-export const getProducts = async () => {
+export const getProducts = async (queries) => {
   try {
     // 1. Fetch de los productos
-    const response = await products.find();
+    const response = await products.findFiltered(queries);
     if (response.length === 0) return null;
     // 2. Enviar respuesta al controller
     return {

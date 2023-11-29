@@ -3,8 +3,14 @@ import CustomError from '../utils/customError.js';
 import ERROR_DICTIONARY from '../config/errorDictionary.js';
 
 export const GETProducts = async (req, res, next) => {
+  const { limit = 10, page = 1, sort = 1 } = req.query;
   try {
-    const products = await ProductsService.getProducts();
+    const products = await ProductsService.getProducts({
+      limit,
+      page,
+      sort: { price: sort * 1 },
+      lean: true,
+    });
     res.status(200).json(products);
   } catch (error) {
     error.from = error.from || 'CONTROLLER';

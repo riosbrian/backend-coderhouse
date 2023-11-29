@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import * as ProductsController from '../../controllers/products.controller.js';
 import { inyectUser } from '../../middlewares/secure.middleware.js';
+import isAuthenticated from '../../middlewares/isAuthenticated.js';
 
 const productsRouter = Router();
 
@@ -11,8 +12,8 @@ productsRouter.param('pid', (req, res, next, param) => {
 
 productsRouter
   .route('/products')
-  .get(ProductsController.GETProducts)
-  .post(inyectUser, ProductsController.POSTNewProduct);
+  .get(inyectUser, isAuthenticated, ProductsController.GETProducts)
+  .post(inyectUser, isAuthenticated, ProductsController.POSTNewProduct);
 
 productsRouter
   .route('/products/:pid([0-9a-zA-Z]+)')
