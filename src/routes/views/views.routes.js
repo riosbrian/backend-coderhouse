@@ -22,7 +22,7 @@ viewsRouter.get(
 viewsRouter.get(
   '/products',
   inyectUser,
-  notLogged,
+  /*   notLogged, */
   ViewsController.GETProducts
 );
 

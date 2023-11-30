@@ -1,8 +1,10 @@
 import * as ViewsService from '../services/views.service.js';
 
+let isAble = false;
+
 export const GETRegister = async (req, res, next) => {
   try {
-    res.render('register');
+    res.render('register', { showHeader: true, isAble });
   } catch (error) {
     next(error);
   }
@@ -17,9 +19,10 @@ export const GETLogin = async (req, res, next) => {
 };
 
 export const GETProducts = async (req, res, next) => {
+  if (req.user) isAble = true;
   const { limit = 10, page = 1, sort = 1 } = req.query;
-  const { user, sub } = req.user;
-  const role = user.role === 'admin' || user.role === 'premium' ? true : false;
+  /* const { user, sub } = req.user; */
+  /* const role = user.role === 'admin' || user.role === 'premium' ? true : false; */
   try {
     const products = await ViewsService.getProducts({
       limit,
@@ -29,10 +32,10 @@ export const GETProducts = async (req, res, next) => {
     });
     res.render('products', {
       data: products.data.docs,
-      role,
-      userID: sub,
+      /* role,
+      userID: sub, */
       showHeader: true,
-      isAble: true,
+      isAble,
     });
   } catch (error) {
     next(error);

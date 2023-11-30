@@ -73,7 +73,8 @@ export const DELETEProduct = async (req, res, next) => {
     // 1. Valido el rol del usuario
     // if (role === 'user') return CustomError.create(ERROR_DICTIONARY.forbidden);
     const deletedProduct = await ProductsService.deletedProduct(req.productID);
-    if (!deletedProduct) return CustomError.create(ERROR_DICTIONARY.default);
+    if (!deletedProduct)
+      return CustomError.create(ERROR_DICTIONARY.notFoundOne);
     // 2. Envio la respuesta
     res.status(200).json(deletedProduct);
   } catch (error) {

@@ -1,10 +1,17 @@
 <header class='header'>
   <span>LOGO</span>
   <ul class='main-menu'>
-    <li><a href='/products'>Productos</a></li>
-    <li><a href='/cart'>Carrito</a></li>
     {{#if isAble}}
+      <li><a href='/'>Inicio</a></li>
+      <li><a href='/products'>Productos</a></li>
+      <li><a href='/cart'>Carrito</a></li>
+      <li><a href='/premium'>Premium</a></li>
       <li><button class='btn btn-logout' id='logout'>Cerrar sesión</button></li>
+    {{else}}
+      <li><a href='/'>Inicio</a></li>
+      <li><a href='/login'>Login</a></li>
+      <li><a href='/register'>Registro</a></li>
+      <li><a href='/products'>Productos</a></li>
     {{/if}}
   </ul>
 </header>
