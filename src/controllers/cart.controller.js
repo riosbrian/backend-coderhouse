@@ -39,6 +39,7 @@ export const POSTAddToCart = async (req, res, next) => {
   const { user } = req.user;
   try {
     const cart = await CartService.addToCart(user.cart, req.productID);
+    if (cart.error) return CustomError.create(ERROR_DICTIONARY.default);
     res.status(201).json(cart);
   } catch (error) {
     error.from = 'CONTROLLER';

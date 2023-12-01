@@ -1,19 +1,20 @@
 import * as ViewsService from '../services/views.service.js';
 
-let isAble = false;
-let role = false;
-
 export const GETIndex = (req, res, next) => {
   try {
-    res.render('index', { showHeader: true, isAble });
+    res.render('index', { menuOptions: req.headerUI, script: '/js/index.js' });
   } catch (error) {
     next(error);
   }
 };
 
 export const GETRegister = async (req, res, next) => {
+  console.log(req.headerUI);
   try {
-    res.render('register', { showHeader: true, isAble });
+    res.render('register', {
+      menuOptions: req.headerUI,
+      script: '/js/form.js',
+    });
   } catch (error) {
     next(error);
   }
@@ -21,20 +22,13 @@ export const GETRegister = async (req, res, next) => {
 
 export const GETLogin = async (req, res, next) => {
   try {
-    res.render('login', { showHeader: true, isAble: false });
+    res.render('login', { menuOptions: req.headerUI, script: '/js/form.js' });
   } catch (error) {
     next(error);
   }
 };
 
 export const GETProducts = async (req, res, next) => {
-  if (req.user) {
-    isAble = true;
-    role =
-      req.user.user.role === 'admin' || req.user.user.role === 'premium'
-        ? true
-        : false;
-  }
   const { limit = 10, page = 1, sort = 1 } = req.query;
   try {
     const products = await ViewsService.getProducts({
@@ -45,9 +39,8 @@ export const GETProducts = async (req, res, next) => {
     });
     res.render('products', {
       data: products.data.docs,
-      role,
-      showHeader: true,
-      isAble,
+      menuOptions: req.headerUI,
+      script: '/js/products.js',
     });
   } catch (error) {
     next(error);
@@ -62,7 +55,7 @@ export const GETCart = async (req, res, next) => {
       ...item.product._doc,
       quantity: item.quantity,
     }));
-    res.render('cart', { data, showHeader: true, isAble: true });
+    res.render('cart', { data, menuOptions: req.headerUI });
   } catch (error) {
     next(error);
   }
@@ -71,16 +64,20 @@ export const GETCart = async (req, res, next) => {
 export const GETEditProduct = async (req, res, next) => {
   const { pid } = req.params;
   const { user, sub } = req.user;
-  const role = user.role === 'admin' || user.role === 'premium' ? true : false;
   try {
     const product = await ViewsService.getProductById(pid);
     res.render('editProduct', {
       data: { ...product.data._doc },
-      role,
-      userID: sub,
-      showHeader: true,
-      isAble: true,
+      menuOptions: req.headerUI,
     });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const GETAddProduct = async (req, res, next) => {
+  try {
+    res.render('addProduct', { menuOptions: req.headerUI });
   } catch (error) {
     next(error);
   }

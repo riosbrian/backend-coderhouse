@@ -1,17 +1,9 @@
 <header class='header'>
   <span>LOGO</span>
   <ul class='main-menu'>
-    {{#if isAble}}
-      <li><a href='/'>Inicio</a></li>
-      <li><a href='/products'>Productos</a></li>
-      <li><a href='/carts'>Carrito</a></li>
-      <li><a href='/premium'>Premium</a></li>
-      <li><button class='btn btn-logout' id='logout'>Cerrar sesión</button></li>
-    {{else}}
-      <li><a href='/'>Inicio</a></li>
-      <li><a href='/login'>Login</a></li>
-      <li><a href='/register'>Registro</a></li>
-      <li><a href='/products'>Productos</a></li>
-    {{/if}}
+    <span></span>
+    {{#each menuOptions}}
+      <li><a href='{{{this.anchor}}}'>{{{this.link}}}</a></li>
+    {{/each}}
   </ul>
 </header>

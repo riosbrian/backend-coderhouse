@@ -1,6 +1,6 @@
-const ROUTE = 'http://localhost:8081/api/auth/';
-
 const authForm = document.querySelector('.form');
+
+const ROUTE = '/api/auth/';
 let endpoint = 'login';
 let userData = {};
 
