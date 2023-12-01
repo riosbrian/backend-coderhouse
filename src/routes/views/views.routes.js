@@ -8,6 +8,8 @@ import {
 } from '../../middlewares/secure.middleware.js';
 const viewsRouter = Router();
 
+viewsRouter.get('/', ViewsController.GETIndex);
+
 viewsRouter.get('/register', inyectUser, isLogged, ViewsController.GETRegister);
 
 viewsRouter.get('/login', inyectUser, isLogged, ViewsController.GETLogin);
@@ -26,6 +28,6 @@ viewsRouter.get(
   ViewsController.GETProducts
 );
 
-viewsRouter.get('/cart', inyectUser, notLogged, ViewsController.GETCart);
+viewsRouter.get('/carts', inyectUser, notLogged, ViewsController.GETCart);
 
 export default viewsRouter;

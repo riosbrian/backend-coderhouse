@@ -8,12 +8,6 @@ const logout = document
       },
     });
     const data = await res.json();
-    /* Swal.fire({
-      title: 'Hasta luego!',
-      text: 'Sesión cerrada correctamente',
-      icon: 'success',
-      confirmButtonText: 'Cerrar',
-    }); */
 
     window.location.href = data.redirect;
   });

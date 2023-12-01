@@ -1,0 +1,250 @@
+components:
+  schemas:
+    register:
+      type: object
+      properties:
+        name:
+          type: string
+        lastname:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+          unique: true
+        password:
+          type: string
+
+    login:
+      type: object
+      properties:
+        email:
+          type: string
+          unique: true
+        password:
+          type: string
+
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+
+  responses:
+    register:
+      type: object
+      properties:
+        error:
+          type: boolean
+          description: Estado de la solicitud
+        data:
+          type: object
+          description: Objeto con la data del usuario registrado
+        message:
+          type: string
+          description: Descripción de la operación realizada
+      example:
+        error: false
+        data:
+          id: 653bc489806d3d93518d1ea8
+          username: example_user
+          email: example@example.com
+          cart: []
+          role: user
+        message: User register successfully
+
+    login:
+      type: object
+      properties:
+        error:
+          type: boolean
+          description: Estado de la solicitud
+        data:
+          type: object
+          description: Objeto con la data del usuario logueado
+        message:
+          type: string
+          description: Descripción de la operación realizada
+      example:
+        error: false
+        data:
+          id: 653bc489806d3d93518d1ea8
+          username: example_user
+          email: example@example.com
+          cart: []
+          role: user
+        message: User logged successfully
+
+    logout:
+      type: object
+      properties:
+        error:
+          type: boolean
+          description: Estado de la solicitud
+        message:
+          type: string
+          description: Descripción de la operación realizada
+      example:
+        error: false
+        message: Session closed successfully
+
+  errorResponses:
+    auth:
+      type: object
+      properties:
+        error:
+          type: boolean
+          description: Estado de la solicitud
+        from:
+          type: string
+          description: Descripción del endpoint del error
+        message:
+          type: string
+          description: Descripción del error
+      example:
+        error: true
+        from: POST /api/sessions/signout middleware
+        message: Invalid credentials
+
+    incomplete:
+      type: object
+      properties:
+        error:
+          type: boolean
+          description: Estado de la solicitud
+        from:
+          type: string
+          description: Descripción del endpoint del error
+        message:
+          type: string
+          description: Descripción del error
+      example:
+        error: true
+        from: POST /api/sessions/register middleware
+        message: Incomplete values
+
+    handler:
+      type: object
+      properties:
+        error:
+          type: boolean
+          description: Estado de la solicitud
+        from:
+          type: string
+          description: Descripción del endpoint del error
+        message:
+          type: string
+          description: Descripción del error
+      example:
+        error: true
+        from: POST /api/sessions/login error handler
+        message: Dat is not defined
+
+paths:
+  /api/auth/register:
+    post:
+      summary: Registrar un usuario
+      tags:
+        - Sessions
+      requestBody:
+        required: true
+        description: Objeto con las propiedades necesarias/mínimas para registrar un usuario
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/register'
+      responses:
+        '200':
+          description: El éxito retorna el id del usuario registrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/register'
+        '400':
+          description: Campos faltantes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/errorResponses/incomplete'
+        '401':
+          description: Credenciales inválidas
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/errorResponses/auth'
+        '500':
+          description: Servidor caído
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/errorResponses/handler'
+
+  /api/auth/login:
+    post:
+      summary: Iniciar sesión
+      tags:
+        - Sessions
+      requestBody:
+        required: true
+        description: Objeto con las propiedades necesarias/mínimas para iniciar sesión
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/login'
+      responses:
+        '200':
+          description: El éxito retorna una cookie "token" para enviar en las peticiones que requieran autenticación
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+                example: token=yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaWduYSBjb2RlciIsInJvbGUiOiJ1c2VyIiwiZW1haWwiOiJpZ25hQGNvZGVyLmNvbSIsImlhdCI6MTY5ODg0MjkzNSwiZXhwIjoxNjk4ODQ2NTM1fQ.FfpFL2XuKTp0MW6F_M8dy5qbKqHtYsw4mDET2611ddI
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/login'
+        '400':
+          description: Campos faltantes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/errorResponses/incomplete'
+        '401':
+          description: Credenciales inválidas
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/errorResponses/auth'
+        '500':
+          description: Servidor caído
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/errorResponses/handler'
+
+  /api/auth/logout:
+    post:
+      summary: Cerrar sesión
+      tags:
+        - Sessions
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Éxito en el cierre de sesión
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/logout'
+        '401':
+          description: Usuario no autenticado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/errorResponses/auth'
+        '500':
+          description: Servidor caído
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/errorResponses/handler'

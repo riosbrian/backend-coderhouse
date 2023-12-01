@@ -8,8 +8,14 @@ import errorHandler from './middlewares/errorHandler.js';
 import indexRouter from './routes/index.routes.js';
 import handlebars from 'express-handlebars';
 import __dirname from './config/dirname.js';
+import swaggerJSDoc from 'swagger-jsdoc';
+import { serve, setup } from 'swagger-ui-express';
+import options from './config/swagger.js';
 
 const app = express();
+
+//SWAGGER
+const specs = swaggerJSDoc(options);
 
 // HANDLEBARS CONFIG
 handlebars.create({
@@ -25,6 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors());
 app.use(express.static('public'));
+app.use('/api/docs', serve, setup(specs));
 
 // ROUTES
 app.use(apiRouter);
