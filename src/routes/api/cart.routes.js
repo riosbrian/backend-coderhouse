@@ -13,13 +13,13 @@ cartRouter.param('pid', (req, res, next, param) => {
 cartRouter
   .route('/carts')
   .get(inyectUser, isAuthenticated, CartController.GETCart)
-  .post(inyectUser, isAuthenticated, CartController.POSTNewCart);
+  .post(inyectUser, isAuthenticated, CartController.POSTNewCart)
+  .delete(inyectUser, CartController.DELETECart);
 
 cartRouter
   .route('/carts/:pid([0-9a-zA-Z]+)')
   .post(inyectUser, isAuthenticated, CartController.POSTAddToCart)
   .put(inyectUser, CartController.PUTUpdateCart)
-  .delete(inyectUser, CartController.DELETEProductToCart)
-  .delete(inyectUser, CartController.DELETECart);
+  .delete(inyectUser, CartController.DELETEProductToCart);
 
 export default cartRouter;

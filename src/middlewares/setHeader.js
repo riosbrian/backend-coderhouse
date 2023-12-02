@@ -9,23 +9,23 @@ const menuOptions = {
     { link: 'Inicio', anchor: '/' },
     { link: 'Productos', anchor: '/products' },
     { link: 'Agregar producto', anchor: '/add' },
-    { link: 'Editar producto', anchor: '/register' },
-    { link: 'Cerrar sesión', anchor: '/logout' },
+    { link: 'Editar producto', anchor: '/edit' },
+    { link: 'Cerrar sesión', anchor: '' },
   ],
   premium: [
     { link: 'Inicio', anchor: '/' },
     { link: 'Productos', anchor: '/products' },
     { link: 'Carrito', anchor: '/carts' },
     { link: 'Agregar producto', anchor: '/add' },
-    { link: 'Editar producto', anchor: '/register' },
-    { link: 'Cerrar sesión', anchor: '/logout' },
+    { link: 'Editar producto', anchor: '/edit' },
+    { link: 'Cerrar sesión', anchor: '' },
   ],
   user: [
     { link: 'Inicio', anchor: '/' },
     { link: 'Productos', anchor: '/products' },
     { link: 'Carrito', anchor: '/carts' },
     { link: 'Premium', anchor: '/premium' },
-    { link: 'Cerrar sesión', anchor: '/logout' },
+    { link: 'Cerrar sesión', anchor: '' },
   ],
 };
 

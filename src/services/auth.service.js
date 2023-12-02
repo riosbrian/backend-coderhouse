@@ -4,8 +4,9 @@ import dao from '../dao/factory.js';
 import CustomError from '../utils/customError.js';
 import { hashPassword, validatePassword } from '../utils/handlePassword.js';
 
-const { User } = dao;
+const { User, Cart } = dao;
 const userDAO = new User();
+const cartDAO = new Cart();
 
 export const register = async (data) => {
   try {
@@ -16,7 +17,8 @@ export const register = async (data) => {
     if (alreadyRegistered)
       return CustomError.create(ERROR_DICTIONARY.registered);
     // 3. Registrar al usuario
-    const response = await userDAO.create(data);
+    const cart = await cartDAO.create();
+    const response = await userDAO.create({ ...data, cart: cart._id });
     return {
       error: false,
       data: response,

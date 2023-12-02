@@ -58,4 +58,12 @@ viewsRouter.get(
   ViewsController.GETCart
 );
 
+viewsRouter.get(
+  '/premium',
+  inyectUser,
+  notLogged,
+  setHeader,
+  ViewsController.GETPremium
+);
+
 export default viewsRouter;

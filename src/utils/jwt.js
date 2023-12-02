@@ -6,7 +6,7 @@ const SECRET = config.JWT_SECRET;
 export const generateToken = (data) => {
   const userData = {
     sub: data.id,
-    user: { username: data.username, role: data.role, cart: data.cart || null },
+    user: { username: data.username, role: data.role, cart: data.cart },
   };
   return jwt.sign(userData, SECRET, { expiresIn: '1d' });
 };

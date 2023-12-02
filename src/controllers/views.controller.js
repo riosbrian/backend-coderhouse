@@ -9,7 +9,6 @@ export const GETIndex = (req, res, next) => {
 };
 
 export const GETRegister = async (req, res, next) => {
-  console.log(req.headerUI);
   try {
     res.render('register', {
       menuOptions: req.headerUI,
@@ -29,6 +28,12 @@ export const GETLogin = async (req, res, next) => {
 };
 
 export const GETProducts = async (req, res, next) => {
+  let role;
+  if (req.user) {
+    role = req.user.user.role;
+  } else {
+    role = 'notLogged';
+  }
   const { limit = 10, page = 1, sort = 1 } = req.query;
   try {
     const products = await ViewsService.getProducts({
@@ -40,6 +45,7 @@ export const GETProducts = async (req, res, next) => {
     res.render('products', {
       data: products.data.docs,
       menuOptions: req.headerUI,
+      role,
       script: '/js/products.js',
     });
   } catch (error) {
@@ -63,12 +69,13 @@ export const GETCart = async (req, res, next) => {
 
 export const GETEditProduct = async (req, res, next) => {
   const { pid } = req.params;
-  const { user, sub } = req.user;
   try {
     const product = await ViewsService.getProductById(pid);
     res.render('editProduct', {
       data: { ...product.data._doc },
+      userID: req.user.sub,
       menuOptions: req.headerUI,
+      script: '/js/editProduct.js',
     });
   } catch (error) {
     next(error);
@@ -77,7 +84,22 @@ export const GETEditProduct = async (req, res, next) => {
 
 export const GETAddProduct = async (req, res, next) => {
   try {
-    res.render('addProduct', { menuOptions: req.headerUI });
+    res.render('addProduct', {
+      menuOptions: req.headerUI,
+      userID: req.user.sub,
+      script: '/js/addProduct.js',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const GETPremium = async (req, res, next) => {
+  try {
+    res.render('premium', {
+      menuOptions: req.headerUI,
+      script: '/js/premium.js',
+    });
   } catch (error) {
     next(error);
   }

@@ -3,7 +3,12 @@
   <ul class='main-menu'>
     <span></span>
     {{#each menuOptions}}
-      <li><a href='{{{this.anchor}}}'>{{{this.link}}}</a></li>
+      {{#if (eq this.link 'Cerrar sesión')}}
+        <li><a id='logout' href='{{{this.anchor}}}'>{{{this.link}}}</a></li>
+      {{else}}
+        <li><a href='{{{this.anchor}}}'>{{{this.link}}}</a></li>
+      {{/if}}
     {{/each}}
   </ul>
 </header>
+<script src='/js/header.js'></script>

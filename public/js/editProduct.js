@@ -1,6 +1,6 @@
 const editProductForm = document.getElementById('editProduct');
 
-const ROUTE = `http://localhost:8081/api/products/`;
+const ROUTE = `/api/products/`;
 
 const pathname = window.location.pathname;
 const segments = pathname.split('/');
@@ -19,7 +19,6 @@ editProductForm.addEventListener('submit', async (e) => {
     stock: formData.get('stock'),
     owner: id,
   };
-
   try {
     const res = await fetch(`${ROUTE}${productId}`, {
       method: 'PUT',

@@ -1,7 +1,6 @@
 const addProductForm = document.getElementById('addProduct');
-const btnAddProduct = document.getElementById('btn-add');
 
-const ROUTE = `http://localhost:8081/api/products/`;
+const ROUTE = `/api/products/`;
 
 addProductForm.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -16,8 +15,6 @@ addProductForm.addEventListener('submit', async (e) => {
     stock: formData.get('stock'),
     owner: id,
   };
-
-  console.log(productData);
 
   try {
     const res = await fetch(`${ROUTE}`, {

@@ -4,7 +4,7 @@
   {{#each data}}
     <article class='product-card'>
       <div class='product-card__img'>
-        <img src='{{{this.thumbnail}}}' alt='game-img' />
+        <img src='{{{this.thumbnail}}}' alt='' />
       </div>
       <div class='product-card__detail'>
         <p class='product-card__name'>{{{this.title}}}</p>
@@ -12,10 +12,12 @@
       </div>
       <div class='product-card__purchase' id={{{this._id}}}>
         <span class='product-card__price'>${{{this.price}}}</span>
-        {{#if this.owner}}
-          <button do='edit' class='btn btn-add btn-edit'>Editar producto</button>
+        {{#if (eq ../role 'notLogged') }}
+          <button do='not' class='btn'>Agregar al carrito</button>
+        {{else if (or this.owner (eq ../role 'admin'))}}
+          <button do='edit' class='btn  btn-edit'>Editar el producto</button>
         {{else}}
-          <button do='add' class='btn btn-add'>Agregar al carrito</button>
+          <button do='add' class='btn'>Agregar al carrito</button>
         {{/if}}
       </div>
     </article>

@@ -5,5 +5,12 @@ export default class TicketDAO {
     this.model = TicketModel;
   }
 
-  create = async () => {};
+  create = async (data) => {
+    try {
+      return await this.model.create(data);
+    } catch (error) {
+      error.from = 'DAO';
+      throw error;
+    }
+  };
 }

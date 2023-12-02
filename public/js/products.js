@@ -5,6 +5,7 @@ productsContainer.addEventListener('click', async (e) => {
   if (e.target.tagName !== 'BUTTON') return;
   const id = e.target.parentNode.getAttribute('id');
   const action = e.target.getAttribute('do');
+  if (action === 'not') return (window.location.href = `/login/`);
   if (action === 'edit') return (window.location.href = `/edit/${id}`);
 
   try {
@@ -22,7 +23,6 @@ productsContainer.addEventListener('click', async (e) => {
         icon: 'error',
         confirmButtonText: 'Aceptar',
       });
-    /* e.target.classList.add('btn-disable'); */
   } catch (error) {
     console.log(error);
   }

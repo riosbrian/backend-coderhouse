@@ -6,7 +6,7 @@
   {{#each data}}
     <article class='item-card'>
       <div class='item-card__img'>
-        <img src='' alt='' />
+        <img src='{{{this.thumbnail}}}' alt='' />
       </div>
       <p class='item-card__name'>{{{this.title}}}</p>
       <span class='item-card__price'>${{{this.price}}}</span>
@@ -18,5 +18,9 @@
       </div>
     </article>
   {{/each}}
+</div>
+<div class='ticket m-2'>
+  <p class='total'></p>
+  <button class='btn btn-end'>Finalizar compra</button>
 </div>
 <script type='module' src='/js/cart.js'></script>
