@@ -1,0 +1,194 @@
+components:
+  schemas:
+    cart:
+      type: object
+      properties:
+        products:
+          type: []
+          description: array de productos
+        quantity:
+          type: number
+          description: cantidad de productos
+
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+
+  responses:
+    successRes:
+      description: Respuesta exitosa
+      type: object
+      properties:
+        error:
+          type: boolean
+          description: Estado de la solicitud
+        data:
+          $ref: "#/components/schemas/cart"
+        message:
+          type: string
+          description: Descripción de la operación realizada
+      example:
+        error: false
+        data:
+          _id: "ID del carrito"
+          products: []
+        message: "Cart delivered succesfully"
+
+  errorResponses:
+    errorRes:
+      description: Respuesta fallida
+      type: object
+      properties:
+        error:
+          type: boolean
+          description: Estado de la solicitud
+        status:
+          type: number
+          description: Codigo de status
+        message:
+          type: string
+          description: Descripción de la operación realizada
+      example:
+        error: true
+        status: 500
+        message: "Server error"
+
+paths:
+  /api/carts:
+    get:
+      summary: Obtener todos los carritos | Requiere loguearse primero
+      tags:
+        - Carts
+      requestBody:
+        description: Obtener los todos carritos | Requiere loguearse primero
+      responses:
+        "200":
+          description: Carritos obtenidos exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/successRes"
+        "500":
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/errorResponses/errorRes"
+
+    post:
+      summary: Crear carrito (solo si el usuario no tiene asignado ninguno)
+      tags:
+        - Carts
+      requestBody:
+        description: Crear carrito
+      responses:
+        "200":
+          description: Carrito creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/successRes"
+        "500":
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/errorResponses/errorRes"
+
+    delete:
+      summary: Eliminar carrito
+      tags:
+        - Carts
+      requestBody:
+        description: Eliminar carrito
+      responses:
+        "200":
+          description: Carritos eliminado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/successRes"
+        "500":
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/errorResponses/errorRes"
+
+  /api/carts/{pid}:
+    post:
+      summary: Agregar producto al carrito
+      tags:
+        - Carts
+      parameters:
+        - name: pid
+          in: path
+          description: ID del producto para agregar al carrito
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Producto agregado al carrito correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/successRes"
+        "500":
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/errorResponses/errorRes"
+
+    put:
+      summary: Editar cantidad de un producto del carrito (Disminuye unicamente, para aumentar hay que agregar)
+      tags:
+        - Carts
+      parameters:
+        - name: pid
+          in: path
+          description: ID del producto para agregar al carrito
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Cantidad modificada correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/successRes"
+        "500":
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/errorResponses/errorRes"
+
+    delete:
+      summary: Eliminar un producto del carrito
+      tags:
+        - Carts
+      parameters:
+        - name: pid
+          in: path
+          description: ID del producto para agregar al carrito
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Producto eliminado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/successRes"
+        "500":
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/errorResponses/errorRes"

@@ -1,4 +1,4 @@
-import CartModel from './models/cart.model.js';
+import CartModel from "./models/cart.model.js";
 
 export default class CartDAO {
   constructor() {
@@ -9,7 +9,7 @@ export default class CartDAO {
     try {
       return await this.model.create(data);
     } catch (error) {
-      error.from = 'DAO';
+      error.from = "DAO";
       throw error;
     }
   };
@@ -18,7 +18,7 @@ export default class CartDAO {
     try {
       return await this.model.find();
     } catch (error) {
-      error.from = 'DAO';
+      error.from = "DAO";
       throw error;
     }
   };
@@ -27,7 +27,7 @@ export default class CartDAO {
     try {
       return await this.model.findById(id);
     } catch (error) {
-      error.from = 'DAO';
+      error.from = "DAO";
       throw error;
     }
   };
@@ -36,7 +36,7 @@ export default class CartDAO {
     try {
       return await this.model.paginate({ _id: id }, options);
     } catch (error) {
-      error.from = 'DAO';
+      error.from = "DAO";
       throw error;
     }
   };
@@ -45,7 +45,7 @@ export default class CartDAO {
     try {
       return await this.model.findByIdAndUpdate(id, data, { new: true });
     } catch (error) {
-      error.from = 'DAO';
+      error.from = "DAO";
       throw error;
     }
   };
@@ -54,7 +54,7 @@ export default class CartDAO {
     try {
       return await this.model.findByIdAndDelete(id);
     } catch (error) {
-      error.from = 'DAO';
+      error.from = "DAO";
       throw error;
     }
   };

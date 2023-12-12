@@ -1,5 +1,5 @@
-import dao from '../dao/factory.js';
-import { v4 as uuidv4 } from 'uuid';
+import dao from "../dao/factory.js";
+import { v4 as uuidv4 } from "uuid";
 
 const { Product, Cart, Ticket } = dao;
 const productDAO = new Product();
@@ -32,10 +32,10 @@ export const createTicket = async (id, cid) => {
     return {
       error: false,
       data: ticket,
-      message: 'ticket',
+      message: "ticket",
     };
   } catch (error) {
-    error.from = 'SERVICE';
+    error.from = "SERVICE";
     throw error;
   }
 };
@@ -53,10 +53,10 @@ export const getTotal = async (id, cid) => {
     return {
       error: false,
       data: totalPrice,
-      message: 'total cart price',
+      message: "total cart price",
     };
   } catch (error) {
-    error.from = 'SERVICE';
+    error.from = "SERVICE";
     throw error;
   }
 };

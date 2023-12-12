@@ -1,5 +1,5 @@
-import UserDTO from '../dao/dto/user.dto.js';
-import dao from '../dao/factory.js';
+import UserDTO from "../dao/dto/user.dto.js";
+import dao from "../dao/factory.js";
 
 const { Cart, User } = dao;
 const cartDAO = new Cart();
@@ -18,7 +18,21 @@ export const createNewCart = async (id) => {
       message: `Cart created successflly for user: ${response.id}`,
     };
   } catch (error) {
-    error.from = error.from || 'SERVICE';
+    error.from = error.from || "SERVICE";
+    throw error;
+  }
+};
+
+export const getCarts = async () => {
+  try {
+    const response = await cartDAO.find();
+    return {
+      error: false,
+      data: response,
+      message: "Carts retrieved successfully",
+    };
+  } catch (error) {
+    error.from = "SERVICE";
     throw error;
   }
 };
@@ -29,10 +43,10 @@ export const getCartById = async (id) => {
     return {
       error: false,
       data: response,
-      message: 'Cart retrieved successfully',
+      message: "Cart retrieved successfully",
     };
   } catch (error) {
-    error.from = 'SERVICE';
+    error.from = "SERVICE";
     throw error;
   }
 };
@@ -50,11 +64,11 @@ export const updateCart = async (id, pid) => {
 
     return {
       error: false,
-      data: cart.products[index] || false,
-      message: 'Cart updated successfully',
+      data: cart,
+      message: "Cart updated successfully",
     };
   } catch (error) {
-    error.from = 'SERVICE';
+    error.from = "SERVICE";
     throw error;
   }
 };
@@ -71,7 +85,7 @@ export const addToCart = async (id, pid) => {
         return {
           error: true,
           data: false,
-          message: 'Stock insuficiente',
+          message: "Stock insuficiente",
         };
       await cartDAO.save(cart);
     } else {
@@ -80,11 +94,11 @@ export const addToCart = async (id, pid) => {
     }
     return {
       error: false,
-      data: cart.products[index],
-      message: 'Product added successfully',
+      data: cart,
+      message: "Product added successfully",
     };
   } catch (error) {
-    error.from = 'SERVICE';
+    error.from = "SERVICE";
     throw error;
   }
 };
@@ -99,10 +113,24 @@ export const deleteProductToCart = async (id, pid) => {
     return {
       error: false,
       data: cart,
-      message: 'Product deleted successfully',
+      message: "Product deleted successfully",
     };
   } catch (error) {
-    error.from = 'SERVICE';
+    error.from = "SERVICE";
+    throw error;
+  }
+};
+
+export const deleteCart = async (id) => {
+  try {
+    const cart = await cartDAO.findByIdAndDelete(id);
+    return {
+      error: false,
+      data: null,
+      message: "Cart deleted successfully",
+    };
+  } catch (error) {
+    error.from = "SERVICE";
     throw error;
   }
 };
@@ -116,10 +144,10 @@ export const emptyCart = async (id) => {
     return {
       error: false,
       data: cart,
-      message: 'Cart emptied successfully',
+      message: "Cart emptied successfully",
     };
   } catch (error) {
-    error.from = 'SERVICE';
+    error.from = "SERVICE";
     throw error;
   }
 };
