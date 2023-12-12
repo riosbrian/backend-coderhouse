@@ -7,7 +7,7 @@ const requester = supertest("http://localhost:8081/api");
 describe("Testing de mi API REST", () => {
   let cookie;
   // AUTH
-  /* it("Deberia registar un nuevo usuario exitosamente", async () => {
+  it("Deberia registar un nuevo usuario exitosamente", async () => {
     const userData = {
       name: "Test",
       lastname: "User",
@@ -29,7 +29,7 @@ describe("Testing de mi API REST", () => {
       "message",
       "User register successflly"
     );
-  }); */
+  });
 
   it("Deberia fallar al intentar registrar un usuario ya registrado", async () => {
     const existingUserData = {
@@ -160,7 +160,7 @@ describe("Testing de mi API REST", () => {
     expect(product).to.have.property("_id");
   });
 
-  /* it("Deberia crear un producto", async () => {
+  it("Deberia crear un producto", async () => {
     const newProductTest = {
       title: "Product test",
       description: "Product description test",
@@ -180,9 +180,9 @@ describe("Testing de mi API REST", () => {
     let { _body } = response;
     const product = _body.data;
     expect(product).to.have.property("_id");
-  }); */
+  });
 
-  /* it("Deberia eliminar un producto por ID", async () => {
+  it("Deberia eliminar un producto por ID", async () => {
     const response = await requester
       .delete("/products/656b6972669887931ee40c5f")
       .set("cookie", [cookie.name + "=" + cookie.value])
@@ -192,7 +192,7 @@ describe("Testing de mi API REST", () => {
     let { _body } = response;
     const product = _body.data;
     expect(product).to.have.property("_id");
-  }); */
+  });
 
   // CARRITO
   it("Deberia obtener el carrito del usuario logueado", async () => {
